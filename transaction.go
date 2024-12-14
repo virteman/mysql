@@ -15,11 +15,11 @@ import (
 
 	"fmt"
 
-	"git.opencp.cn/sde-base/seata-golang/pkg/apis"
-	"git.opencp.cn/sde-base/seata-golang/pkg/client/base/exception"
-	"git.opencp.cn/sde-base/seata-golang/pkg/client/config"
-	"git.opencp.cn/sde-base/seata-golang/pkg/client/rm"
-	"git.opencp.cn/sde-base/seata-golang/pkg/util/log"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/apis"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/base/exception"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/config"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/rm"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
 	"github.com/pkg/errors"
 )
 

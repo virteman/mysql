@@ -1,14 +1,14 @@
-# git.opencp.cn/sde-base/seata-golang v2.0.6+incompatible
-git.opencp.cn/sde-base/seata-golang/pkg/apis
-git.opencp.cn/sde-base/seata-golang/pkg/client/base/exception
-git.opencp.cn/sde-base/seata-golang/pkg/client/base/model
-git.opencp.cn/sde-base/seata-golang/pkg/client/config
-git.opencp.cn/sde-base/seata-golang/pkg/client/rm
-git.opencp.cn/sde-base/seata-golang/pkg/util/log
-git.opencp.cn/sde-base/seata-golang/pkg/util/mysql
-git.opencp.cn/sde-base/seata-golang/pkg/util/parser
-git.opencp.cn/sde-base/seata-golang/pkg/util/runtime
-git.opencp.cn/sde-base/seata-golang/pkg/util/sql
+# gitlab.chongdian.tech/sde-base/seata-golang v2.0.6+incompatible
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/apis
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/base/exception
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/base/model
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/config
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/rm
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/mysql
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/parser
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/runtime
+gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/sql
 # github.com/BurntSushi/toml v0.3.1
 github.com/BurntSushi/toml
 # github.com/go-playground/assert/v2 v2.0.1

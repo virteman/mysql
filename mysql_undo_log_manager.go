@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"git.opencp.cn/sde-base/seata-golang/pkg/util/log"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
 	"github.com/pkg/errors"
 )
 

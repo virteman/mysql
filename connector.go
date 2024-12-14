@@ -13,7 +13,7 @@ import (
 	"database/sql/driver"
 	"net"
 
-	"git.opencp.cn/sde-base/seata-golang/pkg/apis"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/apis"
 )
 
 type connector struct {

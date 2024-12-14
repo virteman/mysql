@@ -8,14 +8,14 @@ import (
 	"strings"
 	"time"
 
-	"git.opencp.cn/sde-base/seata-golang/pkg/apis"
-	"git.opencp.cn/sde-base/seata-golang/pkg/client/rm"
-	"git.opencp.cn/sde-base/seata-golang/pkg/util/mysql"
-	sql2 "git.opencp.cn/sde-base/seata-golang/pkg/util/sql"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/apis"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/rm"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/mysql"
+	sql2 "gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/sql"
 	"github.com/pingcap/parser/ast"
 	"github.com/pingcap/parser/format"
 
-	"github.com/edwardhey/mysql/schema"
+	"github.com/virteman/mysql/schema"
 )
 
 type insertExecutor struct {

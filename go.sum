@@ -1,7 +1,7 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-git.opencp.cn/sde-base/seata-golang v2.0.6+incompatible h1:qiGJaJoSKKTTdk7BcD6iz+1WFWG9SUriNLef9K4FcOU=
-git.opencp.cn/sde-base/seata-golang v2.0.6+incompatible/go.mod h1:z27fcyvM0TjAQYrq6qLNneKs6IaOxBRwUVcrbKayonU=
+gitlab.chongdian.tech/sde-base/seata-golang v2.0.6+incompatible h1:qiGJaJoSKKTTdk7BcD6iz+1WFWG9SUriNLef9K4FcOU=
+gitlab.chongdian.tech/sde-base/seata-golang v2.0.6+incompatible/go.mod h1:z27fcyvM0TjAQYrq6qLNneKs6IaOxBRwUVcrbKayonU=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=

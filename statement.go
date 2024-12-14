@@ -15,7 +15,7 @@ import (
 	"io"
 	"reflect"
 
-	"git.opencp.cn/sde-base/seata-golang/pkg/client/config"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/config"
 	"github.com/pingcap/parser"
 	"github.com/pingcap/parser/ast"
 	_ "github.com/pingcap/parser/test_driver"

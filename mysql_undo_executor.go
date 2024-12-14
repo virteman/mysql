@@ -7,10 +7,10 @@ import (
 	"strings"
 
 	"github.com/google/go-cmp/cmp"
-	"git.opencp.cn/sde-base/seata-golang/pkg/util/log"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
 	"github.com/pkg/errors"
 
-	"github.com/edwardhey/mysql/schema"
+	"github.com/virteman/mysql/schema"
 )
 
 const (
