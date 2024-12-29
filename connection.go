@@ -231,6 +231,11 @@ func (mc *mysqlConn) Prepare(query string) (driver.Stmt, error) {
 		mc:  mc,
 		sql: query,
 	}
+	defer func() {
+		if err != nil {
+			stmt.Close()
+		}
+	}()
 
 	// Read Result
 	columnCount, err := stmt.readPrepareResultPacket()
@@ -459,14 +464,19 @@ func (mc *mysqlConn) Query(query string, args []driver.Value) (driver.Rows, erro
 	return mc.query(query, args)
 }
 
-func (mc *mysqlConn) prepareQuery(query string, args []driver.Value) (*binaryRows, error) {
-	stmt, err := mc.Prepare(query)
-	if err != nil {
-		return nil, err
+func (mc *mysqlConn) prepareQuery(query string, args []driver.Value) (binRow *binaryRows,
+	stmt driver.Stmt, err error) {
+	stmt, err = mc.Prepare(query)
+	if err == nil {
+		defer func() {
+			if err != nil {
+				stmt.Close()
+			}
+		}()
+		s := stmt.(*mysqlStmt)
+		binRow, err = s.query(args)
 	}
-	defer stmt.Close()
-	s := stmt.(*mysqlStmt)
-	return s.query(args)
+	return
 }
 
 func (mc *mysqlConn) readPrepareResultPacket() (uint16, int, error) {

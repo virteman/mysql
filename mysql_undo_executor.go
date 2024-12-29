@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/google/go-cmp/cmp"
-	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
 	"github.com/pkg/errors"
+	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
 
 	"github.com/virteman/mysql/schema"
 )
@@ -215,9 +215,13 @@ func (executor MysqlUndoExecutor) queryCurrentRecords(conn *mysqlConn) (*schema.
 
 	inCondition := appendInParam(len(pkValues))
 	selectSql := fmt.Sprintf(SelectSqlTemplate, b.String(), tableMeta.TableName, pkName, inCondition)
-	rows, err := conn.prepareQuery(selectSql, pkValues)
+	rows, stmt, err := conn.prepareQuery(selectSql, pkValues)
 	if err != nil {
 		return nil, err
 	}
+	defer (func() {
+		rows.Close()
+		stmt.Close()
+	})()
 	return buildRecords(tableMeta, rows), nil
 }
