@@ -15,12 +15,12 @@ import (
 
 	"fmt"
 
+	"github.com/pkg/errors"
 	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/apis"
 	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/base/exception"
 	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/config"
 	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/client/rm"
 	"gitlab.chongdian.tech/sde-base/seata-golang/pkg/util/log"
-	"github.com/pkg/errors"
 )
 
 type mysqlTx struct {
@@ -35,7 +35,7 @@ func (tx *mysqlTx) Commit() (err error) {
 		tx.mc = nil
 	}()
 
-	if tx.mc == nil || tx.mc.closed.IsSet() {
+	if tx.mc == nil || tx.mc.closed.Load() {
 		return ErrInvalidConn
 	}
 	if tx.mc.xid == "" {
@@ -90,7 +90,7 @@ func (tx *mysqlTx) Rollback() (err error) {
 		tx.mc = nil
 	}()
 
-	if tx.mc == nil || tx.mc.closed.IsSet() {
+	if tx.mc == nil || tx.mc.closed.Load() {
 		return ErrInvalidConn
 	}
 
