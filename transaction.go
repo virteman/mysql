@@ -69,6 +69,14 @@ func (tx *mysqlTx) Commit() (err error) {
 				}
 			} else {
 				err = tx.mc.exec("COMMIT")
+				if err != nil {
+					return err
+				}
+			}
+			// 一阶段本地事务已提交，必须上报 PhaseOneDone。否则 TC 侧分支永远停留在
+			// Registered，二阶段删除 undo log 可能跑在本地事务落库之前，删到 0 行却回成功，
+			// 留下永远无人清理的孤儿 undo log。
+			if err = tx.reportSuccess(); err != nil {
 				return err
 			}
 		} else {
@@ -133,25 +141,32 @@ func (tx *mysqlTx) register() (int64, error) {
 	return branchID, err
 }
 
+// reportSuccess 按 client.reportSuccessEnable(seata 默认开启) 决定是否上报一阶段提交成功。
+func (tx *mysqlTx) reportSuccess() error {
+	if !config.GetATConfig().ReportSuccessEnable {
+		return nil
+	}
+	return tx.report(true)
+}
+
 func (tx *mysqlTx) report(commitDone bool) error {
-	retry := config.GetATConfig().LockRetryTimes
+	status := apis.PhaseOneFailed
+	if commitDone {
+		status = apis.PhaseOneDone
+	}
+
+	retry := config.GetATConfig().ReportRetryCount
+	var err error
 	for retry > 0 {
-		var err error
-		if commitDone {
-			err = rm.GetResourceManager().BranchReport(context.Background(),
-				tx.mc.ctx.xid, tx.mc.ctx.branchID, apis.AT, apis.PhaseOneDone, nil)
-		} else {
-			err = rm.GetResourceManager().BranchReport(context.Background(),
-				tx.mc.ctx.xid, tx.mc.ctx.branchID, apis.AT, apis.PhaseOneFailed, nil)
-		}
-		if err != nil {
-			log.Errorf("Failed to report [%d/%s] commit done [%t] Retry Countdown: %d",
-				tx.mc.ctx.branchID, tx.mc.ctx.xid, commitDone, retry)
+		err = rm.GetResourceManager().BranchReport(context.Background(),
+			tx.mc.ctx.xid, tx.mc.ctx.branchID, apis.AT, status, nil)
+		if err == nil {
+			return nil
 		}
 		retry = retry - 1
-		if retry == 0 {
-			return errors.WithMessagef(err, "Failed to report branch status %t", commitDone)
-		}
+		log.Errorf("Failed to report [%d/%s] commit done [%t] Retry Countdown: %d",
+			tx.mc.ctx.branchID, tx.mc.ctx.xid, commitDone, retry)
+		time.Sleep(config.GetATConfig().LockRetryInterval)
 	}
-	return nil
+	return errors.WithMessagef(err, "Failed to report branch status %t", commitDone)
 }
